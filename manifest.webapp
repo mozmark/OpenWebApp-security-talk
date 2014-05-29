@@ -1,0 +1,24 @@
+{
+  "name": "OpenWebApp security talk",
+  "description": "Worst Firefox OS app in the world. Ever.",
+  "launch_path": "/template.html",
+  "type": "privileged",
+  "developer": {
+    "name": "Mark Goodwin",
+    "url": "https://github.com/mozmark/"
+  },
+  "permissions": {
+  },
+  "locales": {
+    "en-US": {
+    "name": "FxOS Security Talk",
+    "description": "Firefox OS security talk"
+    }
+  },
+  "default_locale": "en-US",
+  "icons": {
+    "30": "/style/icons/icon.png"
+  },
+  "orientation": "landscape",
+  "messages": []
+}

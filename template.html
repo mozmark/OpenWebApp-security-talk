@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Open Web Apps and Security</title>
+  </head>
+  <body>
+    <!-- Your Slides -->
+    <!-- One section is one slide -->
+    <section>
+    <figure> <!-- Figures are used to display images and videos fullpage -->
+      <img src="logo_large.png">
+    </figure>
+    <div role="note">Logo. etc</div>
+    </section>
+
+    <section>
+    <!-- This is the first slide -->
+    <h1>An Introduction to FxOS Security</h1>
+    <footer>Paul Theriault, Mark Goodwin (Mozilla)</footer>
+    </section>
+
+    <section>
+    <h3>About us</h3>
+    <ul>
+      <li>We work for <a href="http://www.mozilla.org">Mozilla</a></li>
+      <li><b>Paul:</b> Firefox OS Security Lead</li>
+      <li><b>Mark:</b> Platform and Firefox</li>
+    </ul>
+    <div role="note">
+      Paul:
+      <ul>
+        <li>Firefox OS</li>
+      </ul>
+      Mark:
+      <ul>
+        <li>Fx (Desktop & Android)</li>
+        <li>Security tools</li>
+      </ul>
+    </div>
+    </section>
+
+    <section>
+    <h3>A plan for the talk</h3>
+    <ul>
+      <li>Introduce Firefox OS</li>
+      <li>Look at Open Web Apps (and security)</li>
+      <li>Demo of Firefox Devtools</li>
+    </ul>
+    <div role="note">
+      Paul:
+      <ul>
+        <li>Firefox OS</li>
+      </ul>
+      Mark:
+      <ul>
+        <li>Fx (Desktop & Android)</li>
+        <li>Security tools</li>
+      </ul>
+    </div>
+    </section>
+
+    <section>
+    <h3>What is Firefox OS?</h3>
+    <ul>
+      <li>Gonk - Linux (via Android)</li>
+      <li>... and Gecko (from Firefox)</li>
+      <li>... and HTML, JavaScript and CSS
+      <br> - for Gaia (the UI) and webapps
+      </li>
+    </ul>
+    <div role="note">
+      <ul>
+        <li></li>
+        <li>Firefox OS</li>
+      </ul>
+    </div>
+    </section>
+
+
+    <section>
+    <figure> <!-- Figures are used to display images and videos fullpage -->
+      <img src="FirefoxOS.png">
+    </figure>
+    <div role="note">Diagram of FxOS layers</div>
+    <div role="note">
+      <p>
+      I mentioned certified apps - makes sense to explain how those fit in.
+      </p>
+      <p>
+      People ask if it's based on Android: Yes and no, probably not the way you think. Talk about diagram.
+      </p>
+      <p>
+      Also, sandboxed content processes, etc.
+      </p>
+    </div>
+    </section>
+
+    <section>
+    <h3>What's a Web App?</h3>
+    <ul class="incremental">
+      <li>An Application on the Web</li>
+      <li>offline, with device features</li>
+      <li>more specifically, <a href="https://developer.mozilla.org/en-US/docs/Web/Apps">Open Web Apps</a></li>
+    </ul>
+    <div role="note">
+      <p>
+      Applications on the web:
+      <ul>
+        <li>First only information, Then CGIs, SSL (interaction, e-commerce)</li>
+        <li>Then AJAX, websockets, rich, responsive UIs (gmail, maps, google docs)...</li>
+      </ul>
+      </p>
+      <p>
+      We've been making apps on the web for over 15 years. What's the big deal?
+      These were all build for always-connected use.
+      </p>
+      <p>
+      We're talking about Mozilla's proposed Open Web Apps standard here. Google
+      are doing something similar with Chrome packaged apps. There's a hope
+      these will eventually gel together to form a common standard. For devs:
+      new(er) tech for offline, mobile use, etc.
+      </p>
+    </div>
+    </section>
+
+    <section>
+    <h3>How is this different from what I know?</h3>
+    <ul class="incremental">
+      <li>Mostly it's not, but:</li>
+      <li>Existing features are new to some</li>
+      <li>There are some new APIs</li>
+    </ul>
+    <div role="note">
+      <p>
+      Mostly the same. Existing websites can be used as 'apps' on FxOS. All of
+      the skills you have already are useful.
+      </p>
+      <p>
+      Existing first time - these have impact:
+      Storage (DOM storage, indexedDB), App cache, CSP
+      </p>
+      <p>
+      New features:
+      Calls, SMS, battery, screen lock, etc.
+      </p>
+    </div>
+    </section>
+
+    <section>
+    <h3>What's actually new?</h3>
+    <ul class="incremental">
+      <li>Describing your app (<a href="https://developer.mozilla.org/en-US/docs/Web/Apps/Manifest">manifests</a>)</li>
+      <li>App <a href="https://developer.mozilla.org/en-US/docs/Web/Apps/Packaged_apps">packaging</a></li>
+      <li>Some <a href="https://developer.mozilla.org/en-US/docs/WebAPI">APIs</a></li>
+      <li><a href="https://developer.mozilla.org/en-US/docs/Web/Apps/App_permissions">Permissions</a></li>
+    </ul>
+    <div role="note">
+      <p>
+      Packaging may be necessary - there are different types of apps (hosted, hosted packaged, privileged, certified)
+      </p>
+      <p>
+      We'd like to, one day, work out ways of eliminating the need for app packaging
+      </p>
+    </div>
+    </section>
+
+    <section>
+    <h3>Security implications?</h3>
+    <ul class="incremental">
+      <li>You can forget some stuff</li>
+      <li>Mostly, things are the same</li>
+      <li>Some things have new emphasis</li>
+    </ul>
+    <div role="note">
+      <p>
+      Not really talked about security yet...
+      </p>
+      <p>
+      Forget: for packaged apps you needn't worry about ancient browser quirks:
+      No more worrying about IE event leakage across frames, etc.
+      </p>
+      <p>
+      Keep: Focus on the security stuff around the actual platform. The web is
+      still the web. Hosted (non packaged) apps have the same concerns as any
+      web app you've reviewed. CSRF, XSS, UI Redress, etc.
+      </p>
+      <p>
+      Emphasise: Stuff that happens in the client. Because things have to
+      happen offline, this part may have a bigger attack surface than you're
+      used to. Also <b>(and this is important)</b> some existing web features
+      that you may, thus far, have ignored have bigger importance with new APIs
+      </p>
+    </div>
+    </section>
+
+    <section>
+    <h3>More important: DOM XSS</h3>
+    <ul class="incremental">
+      <li>Attack surface - more on the client</li>
+      <li>Sources you're not used to<br> (SMS, contact cards, etc)</li>
+      <li>Experience</li>
+      <li>Libraries and Frameworks</li>
+      <li>Impact - privileged APIs</li>
+    </ul>
+    <div role="note">
+      <p>
+      Attack surface: for some packaged apps, that's <b>all there is</b>.
+      </p>
+      <p>
+      Sources - familiar with sources / sinks? Demo of DOM XSS. e.g. <br>
+      http://people.mozilla.com/~mgoodwin/presentations/20130830/shells/embedder.html<br>
+      #javascript:void(window.parent.location.replace("javascript:new function(){document.domain=document.domain.substring(7); alert(document.domain);}()"))
+      </p>
+      <p>
+      Experience - web devs are used to output encoding on the server - less used to preventing DOM XSS
+      </p>
+      <p>
+      Libraries - devs don't get (as much) help. Worse, stuff that made things safe(r) in the past may fail with CSP (e.g. anecdotally, jquery)
+      </p>
+      <p>
+      Impact - if your app is privileged, an attack can expose more than just the user's session
+      </p>
+    </div>
+    </section>
+
+
+    <section>
+    <h3>More important: CSP</h3>
+    <ul class="incremental">
+      <li>Packaged apps use <a href="https://developer.mozilla.org/en-US/docs/Security/CSP/Introducing_Content_Security_Policy">CSP</a></li>
+      <li>Good news: protects by default</li>
+      <li>Bad news: might break stuff (demo?)</li>
+    </ul>
+    <div role="note">
+      <p>
+      BTW; even better news than "it protects you by default" is that you can provide your own policies in cases where there isn't one (hosted apps), and you can tighten the default on packaged apps.
+      </p>
+    </div>
+    </section>
+
+    <section>
+    <h3>More important: Transport Layer Protection</h3>
+    <ul class="incremental">
+      <li>Not a new issue, but...</li>
+      <li>What about app updates?</li>
+      <li>Particular problem area for 'mobile devs'</li>
+      <li>Use HTTPS for everything</li>
+    </ul>
+    <div role="note">
+      <p>
+      You don't just have to worry about a single session; if an attacker can poison the app cache so the user stays owned.
+      </p>
+      <p>
+      This issue illustrates an important point: Many devs will come from 'mobile' rather than 'web' background.
+      </p>
+      <p>
+      Best practice is to always use HTTPS
+      </p>
+    </div>
+    </section>
+
+    <section>
+    <h2>End!</h2>
+    <ul>
+      <li> Questions? </li>
+      <li> Contact: </li>
+      Twitter: @mr_goodwin<br/>
+      irc: mgoodwin on irc.mozilla.org<br/>
+    </ul>
+    <div role="note">
+      <p>
+      Usually I'd indulge in a "Mozilla stuff" section, but I'm assuming curtis
+      will have bored you all to death about that already ;)
+      </p>
+    </div>
+    </section>
+  </body>
+  <!-- Your Style -->
+  <!-- Define the style of your presentation -->
+
+  <!-- Maybe a font from http://www.google.com/webfonts ? -->
+  <link href='oswald.css' rel='stylesheet'>
+  <link href='dzslides.css' rel='stylesheet'>
+
+<!-- {{{{ dzslides core
+#
+#
+#     __  __  __       .  __   ___  __
+#    |  \  / /__` |    | |  \ |__  /__`
+#    |__/ /_ .__/ |___ | |__/ |___ .__/ core :€
+#
+#
+# The following block of code is not supposed to be edited.
+# But if you want to change the behavior of these slides,
+# feel free to hack it!
+#
+-->
+
+<div id="progress-bar"></div>
+
+<!-- Default Style -->
+<link href='dzslides2.css' rel='stylesheet'>
+
+<script src="dzslides.js">
+
+</script>
+
+</html>
+<!-- vim: set fdm=marker: }}} -->
